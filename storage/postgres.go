@@ -2,6 +2,7 @@ package storage
 
 import (
 	"fmt"
+	"github.com/rs/zerolog/log"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -23,6 +24,9 @@ func NewConnection(config *Config) (*gorm.DB, error) {
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return db, err
+	} else {
+		log.Info().Msg("Connection to Postgres successful")
 	}
+
 	return db, nil
 }
